@@ -384,14 +384,17 @@
   .tier .link-cta:hover { color: #fff; }
 
   /* ---------- Footer ---------- */
+  /* The eight-link nav plus brand and copyright needs ~760px, so the row has to
+     be allowed to wrap or it pushes the copyright past the viewport at tablet
+     width. Same wrap the other pages use. */
   footer {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 44px; margin-top: 40px;
+    padding: 44px; margin-top: 40px; flex-wrap: wrap; gap: 20px;
   }
   footer .brand { font-size: 14px; color: #ccc; }
   footer .brand .dot { width: 9px; height: 9px; }
   footer .fine { font-family: var(--mono); font-size: 12px; color: var(--faint); }
-  footer nav { display: flex; gap: 26px; }
+  footer nav { display: flex; gap: 26px; flex-wrap: wrap; }
   footer nav a { font-size: 13px; color: #777; }
   footer nav a:hover { color: #fff; }
 

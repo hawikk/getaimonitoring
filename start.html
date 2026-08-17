@@ -126,14 +126,17 @@
     max-width: 46em;
   }
 
+  /* The eight-link nav plus brand and copyright needs ~760px, so the row has to
+     be allowed to wrap or it pushes the copyright past the viewport at tablet
+     width. Same wrap the other pages use. */
   footer {
     display: flex; align-items: center; justify-content: space-between;
-    padding: 44px;
+    padding: 44px; flex-wrap: wrap; gap: 20px;
   }
   footer .brand { font-size: 14px; color: #ccc; }
   footer .brand .dot { width: 9px; height: 9px; }
   footer .fine { font-family: var(--mono); font-size: 12px; color: var(--faint); }
-  footer nav { display: flex; gap: 26px; }
+  footer nav { display: flex; gap: 26px; flex-wrap: wrap; }
   footer nav a { font-size: 13px; color: #777; }
   footer nav a:hover { color: #fff; }
 
@@ -145,6 +148,10 @@
     .nav { padding: 20px 24px; }
     .nav-cta .pill-outline { display: none; }
     main, footer { padding-left: 24px; padding-right: 24px; }
+    /* Matches the homepage footer: on a phone the row becomes a column and the
+       nav wraps, rather than forcing ~300px of horizontal scroll. */
+    footer { flex-direction: column; align-items: flex-start; gap: 22px; padding: 40px 24px; }
+    footer nav { flex-wrap: wrap; gap: 14px 22px; }
   }
 </style>
 </head>
