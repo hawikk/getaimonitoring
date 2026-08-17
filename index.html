@@ -4,17 +4,18 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>AI Monitoring | Monitor and govern AI behavior in real time</title>
-<meta name="description" content="Security visibility and guardrails for every AI coding tool your engineers use. AI usage monitoring in one stack.">
+<meta name="description" content="Self-hosted, metadata-only visibility and guardrails for every AI coding tool your engineers use. Never prompt text, never source code.">
 <link rel="canonical" href="https://getaimonitoring.com/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://getaimonitoring.com/">
 <meta property="og:title" content="AI Monitoring | Monitor and govern AI behavior in real time">
-<meta property="og:description" content="Security visibility and guardrails for every AI coding tool your engineers use. AI usage monitoring in one stack.">
+<meta property="og:description" content="Self-hosted, metadata-only visibility and guardrails for every AI coding tool your engineers use. Never prompt text, never source code.">
 <meta property="og:image" content="https://getaimonitoring.com/og.png">
+<meta property="og:image:alt" content="AI Monitoring">
 <meta property="og:locale" content="en_US">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="AI Monitoring | Monitor and govern AI behavior in real time">
-<meta name="twitter:description" content="Security visibility and guardrails for every AI coding tool your engineers use. AI usage monitoring in one stack.">
+<meta name="twitter:description" content="Self-hosted, metadata-only visibility and guardrails for every AI coding tool your engineers use. Never prompt text, never source code.">
 <meta name="twitter:image" content="https://getaimonitoring.com/og.png">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='5' fill='white'/%3E%3C/svg%3E">
 <style>
@@ -26,6 +27,11 @@
     --fg: #fff;
     --dim: #888;
     --faint: #555;
+    /* Legible body tone for the four pillars and screenshot captions;
+       --dim (#888) is ~5.9:1 on black and reads muddy at mono 13-14px. */
+    --body: #b9c2be;
+    /* Console accent (apps/web --accent). Flat fills only, no gradients. */
+    --accent: #2dd4a8;
   }
   * { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -163,8 +169,17 @@
      scrolls away with it (no fixed full-page field). Fixed-viewport v9 is
      preserved at apps/landing/variants/fixed-viewport.html and git tag
      landing-fixed-viewport-v9 for instant rollback. */
+  /* Desktop rhythm: a full 100vh hero left ~400px of dead black under the
+     CTA before the pillars. Cap the hero band and center the copy inside it
+     so the pillar row lands at (or just under) the fold. The <=960px query
+     restores the original 100vh / top-anchored mobile hero verbatim. */
   .hero {
-    position: relative; min-height: 100vh; display: flex; flex-direction: column;
+    /* Sized so the four pillars clear the fold on a 900px-tall viewport once
+       browser chrome is subtracted. At 77vh the hero reserved ~300px of empty
+       space below the CTA and pushed the pillar text to y=895, close enough to
+       the edge that it read as an accidental crop rather than a scroll cue. */
+    position: relative; min-height: clamp(560px, 70vh, 720px);
+    display: flex; flex-direction: column; justify-content: center;
     overflow: hidden; isolation: isolate;
   }
   #field {
@@ -174,7 +189,9 @@
   .hero-inner {
     position: relative; z-index: 1;
     text-align: center;
-    padding: 21vh 24px 0;
+    /* Top pad offsets the absolutely positioned nav so the centered block
+       reads optically centered rather than sitting under the logo. */
+    padding: 48px 24px 0;
   }
   .eyebrow {
     font-family: var(--mono); font-size: 12px; letter-spacing: 0.34em;
@@ -185,7 +202,12 @@
     font-weight: 200; letter-spacing: -0.02em; line-height: 1.12;
     color: #fff;
   }
-  .hero-cta { margin-top: 46px; display: flex; align-items: center; justify-content: center; gap: 30px; }
+  .hero-sub {
+    margin: 24px auto 0; max-width: 44em;
+    font-family: var(--mono); font-size: 14px; line-height: 1.8;
+    letter-spacing: 0.01em; color: var(--body);
+  }
+  .hero-cta { margin-top: 38px; display: flex; align-items: center; justify-content: center; gap: 30px; }
   .hero-cta .pill-solid { font-size: 15px; padding: 12px 28px; }
   .demo-link { font-size: 15px; color: #aaa; transition: color 0.2s; }
   .demo-link:hover { color: #fff; }
@@ -195,11 +217,14 @@
   /* ---------- Features ---------- */
   .features {
     max-width: 1180px; margin: 0 auto;
-    padding: 150px 44px 60px;
-    display: grid; grid-template-columns: repeat(4, 1fr); gap: 72px;
+    padding: 72px 44px 60px;
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 48px;
   }
-  .features h3 { font-size: 20px; font-weight: 500; letter-spacing: -0.01em; margin-bottom: 16px; }
-  .features p { font-family: var(--mono); font-size: 13px; line-height: 1.75; color: var(--dim); }
+  /* Accent rule reads the four pillars as a grid and carries the console
+     teal onto the page. Flat 2px fill, no glow. */
+  .features > div { border-top: 2px solid var(--accent); padding-top: 24px; }
+  .features h3 { font-size: 22px; font-weight: 500; letter-spacing: -0.01em; margin-bottom: 14px; }
+  .features p { font-family: var(--mono); font-size: 14px; line-height: 1.85; color: var(--body); }
 
   /* ---------- Video (inline, no card chrome) ---------- */
   .watch {
@@ -236,6 +261,29 @@
     letter-spacing: 0.04em;
   }
 
+  /* ---------- Product screens (static, for people who skip the video) ---------- */
+  .shots { max-width: 1120px; margin: 0 auto; padding: 104px 44px 0; text-align: center; }
+  .shots .eyebrow { margin-bottom: 22px; }
+  .shots h2 {
+    font-size: clamp(30px, 3.2vw, 44px);
+    font-weight: 200;
+    letter-spacing: -0.02em;
+    margin-bottom: 52px;
+  }
+  .shot { margin: 0; text-align: left; }
+  .shot img {
+    display: block; width: 100%; height: auto;
+    border: 1px solid rgba(255,255,255,0.12);
+    border-radius: 6px;
+    background: #0b0f0e;
+  }
+  .shot figcaption {
+    font-family: var(--mono); font-size: 13px; line-height: 1.75;
+    color: var(--body); margin-top: 16px;
+  }
+  .shot figcaption b { color: #fff; font-weight: 500; }
+  .shot-row { display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-top: 56px; }
+
   /* ---------- Pricing ---------- */
   .pricing { max-width: 1180px; margin: 0 auto; padding: 150px 44px 120px; }
   .pricing-head { text-align: center; margin-bottom: 110px; }
@@ -269,13 +317,22 @@
     .nav-links { display: none; }
     .features { grid-template-columns: repeat(2, 1fr); gap: 56px; padding-top: 110px; }
     .tiers { grid-template-columns: 1fr; gap: 80px; }
+    /* Mobile/tablet hero is byte-for-byte the previous layout. */
+    .hero { min-height: 100vh; justify-content: flex-start; }
     .hero-inner { padding-top: 24vh; }
+    .shots { padding-top: 88px; }
+    .shot-row { grid-template-columns: 1fr; gap: 48px; margin-top: 48px; }
   }
   @media (max-width: 560px) {
     .nav { padding: 20px 24px; }
     .nav-cta .pill-outline { display: none; }
     .features { grid-template-columns: 1fr; }
-    .features, .pricing, .watch { padding-left: 24px; padding-right: 24px; }
+    .features, .pricing, .watch, .shots { padding-left: 24px; padding-right: 24px; }
+    /* The footer row has always overflowed the viewport on phones (it forced
+       ~516px of horizontal scroll before the Screens link existed). Stack and
+       wrap it so the page has no horizontal scroll at any width. */
+    footer { flex-direction: column; align-items: flex-start; gap: 22px; padding: 40px 24px; }
+    footer nav { flex-wrap: wrap; gap: 14px 22px; }
   }
 </style>
 </head>
@@ -292,6 +349,7 @@
   <nav class="nav-links" aria-label="Primary">
     <a href="#features">Features</a>
     <a href="#video">Video</a>
+    <a href="#screens">Screens</a>
     <a href="#pricing">Pricing</a>
   </nav>
   <div class="nav-cta">
@@ -306,6 +364,7 @@
     <div class="hero-inner">
       <p class="eyebrow">ai usage monitoring</p>
       <h1>Monitor and govern<br>AI behavior in real time</h1>
+      <p class="hero-sub">Self-hosted. Metadata only. Never your prompts, never your code.</p>
       <div class="hero-cta">
         <a class="pill pill-solid" href="start.html">Get Started</a>
         <a class="demo-link" href="mailto:sales@getaimonitoring.com?subject=Demo%20request">Request a Demo<span class="arrow" aria-hidden="true">→</span></a>
@@ -316,15 +375,15 @@
   <section class="features" id="features" aria-label="What it does">
     <div>
       <h3>Observe</h3>
-      <p>every prompt, tool call,<br>file touch, every agent</p>
+      <p>every AI tool, agent, and<br>tool call, metadata only</p>
     </div>
     <div>
       <h3>Govern</h3>
-      <p>guardrails enforced inline<br>before the action runs</p>
+      <p>secret rules block inline<br>on Claude Code endpoints</p>
     </div>
     <div>
       <h3>Analyze</h3>
-      <p>attribution, coverage, risk<br>across your entire fleet</p>
+      <p>pseudonymous attribution,<br>coverage and fleet risk</p>
     </div>
     <div>
       <h3>Improve</h3>
@@ -346,6 +405,31 @@
       </video>
     </div>
     <p class="watch-cap">51s walkthrough. Synthetic demo data. No customer traffic.</p>
+  </section>
+
+  <section class="shots" id="screens" aria-label="Product screenshots">
+    <p class="eyebrow">inside the console</p>
+    <h2>What the console shows</h2>
+    <figure class="shot">
+      <img src="assets/shot-overview.webp"
+           alt="AI Monitoring overview dashboard showing active users, events in range, unhandled criticals, estimated spend, a live activity chart, and a list of top open alerts."
+           width="2064" height="1290" loading="lazy" decoding="async">
+      <figcaption><b>Overview.</b> Fleet-wide AI tool usage on one screen: active seats, event volume, open criticals, estimated spend, and sanctioned versus unapproved tools.</figcaption>
+    </figure>
+    <div class="shot-row">
+      <figure class="shot">
+        <img src="assets/shot-activity.webp"
+             alt="Live activity trail listing timestamped events with a security score, pseudonymous user reference, tool, model, token count, estimated cost, and match flags."
+             width="1240" height="620" loading="lazy" decoding="async">
+        <figcaption><b>Live activity.</b> One row per event: security score, pseudonymous user, tool, model, tokens, cost, and match flags. Flags only, never the matched text.</figcaption>
+      </figure>
+      <figure class="shot">
+        <img src="assets/shot-security.webp"
+             alt="Security view showing guardrail detector match flags by detector name with severity, category, match counts, affected users and tools, and first and last seen dates."
+             width="1240" height="620" loading="lazy" decoding="async">
+        <figcaption><b>Security.</b> Detector hits rolled up by name and severity, plus unapproved tools and MCP servers found on the fleet. Counts, not content.</figcaption>
+      </figure>
+    </div>
   </section>
 
   <section class="pricing" id="pricing" aria-label="Pricing">
@@ -376,7 +460,7 @@
           <li>fleet beyond the community cap</li>
           <li>shared findings &amp; team dashboard</li>
           <li>community + email support</li>
-          <li>community enforce rules that ship free</li>
+          <li>free secret enforce rules (Claude Code)</li>
         </ul>
         <a class="pill pill-outline tier-cta" href="mailto:sales@getaimonitoring.com?subject=AIM%20Team">Contact Sales</a>
       </div>
@@ -402,6 +486,7 @@
   <nav aria-label="Footer">
     <a href="#features">Features</a>
     <a href="#video">Video</a>
+    <a href="#screens">Screens</a>
     <a href="#pricing">Pricing</a>
     <a href="https://github.com/hawikk/aim">GitHub</a>
     <a href="/.well-known/security.txt">Security</a>
