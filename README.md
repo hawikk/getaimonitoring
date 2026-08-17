@@ -5,11 +5,10 @@ Public marketing site for [getaimonitoring.com](https://getaimonitoring.com).
 Privacy-first developer AI governance. Community is free for personal projects
 and public open source. Team and Enterprise are licensed fleets.
 
-| Tier | Public price | Start |
-|---|---|---|
-| Community | Free (soft cap: 3 seats) | [Clone hawikk/aim](https://github.com/hawikk/aim) |
-| Team | $12 / seat / month annual ($15 monthly, min 5) | `sales@getaimonitoring.com` |
-| Enterprise | From $28 / seat / month | `sales@getaimonitoring.com` |
+| Path | Start |
+|---|---|
+| Community (free, soft cap: 3 seats) | [Clone hawikk/aim](https://github.com/hawikk/aim) |
+| Team and Enterprise | `sales@getaimonitoring.com` |
 
 Community is a GitHub clone, not an access request.
 

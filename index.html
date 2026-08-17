@@ -371,7 +371,7 @@
   .pricing-head { text-align: center; margin-bottom: 110px; }
   .pricing-head h2 { font-size: clamp(34px, 3.4vw, 48px); font-weight: 200; letter-spacing: -0.02em; }
   .pricing-head p { font-family: var(--mono); font-size: 13px; color: var(--dim); margin-top: 20px; }
-  .tiers { display: grid; grid-template-columns: repeat(3, 1fr); gap: 88px; align-items: stretch; }
+  .tiers { display: grid; grid-template-columns: 1fr 1fr; gap: 88px; align-items: stretch; max-width: 820px; margin: 0 auto; }
   .tier { display: flex; flex-direction: column; min-height: 100%; }
   .tier-name { font-family: var(--mono); font-size: 12px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--dim); }
   .tier-price { font-size: 44px; font-weight: 200; letter-spacing: -0.02em; margin-top: 26px; }
@@ -545,8 +545,8 @@
 
   <section class="pricing" id="pricing" aria-label="Pricing">
     <div class="pricing-head">
-      <h2>Simple, honest pricing</h2>
-      <p>Community free for personal use and public open source. Team for fleets. Enterprise for security-led orgs.</p>
+      <h2>Community is free</h2>
+      <p>Personal use and public open source clone the repo. A fleet is a conversation with sales.</p>
     </div>
     <div class="tiers">
       <div class="tier">
@@ -563,30 +563,17 @@
         <a class="pill pill-solid tier-cta" href="https://github.com/hawikk/aim">Clone on GitHub</a>
       </div>
       <div class="tier">
-        <p class="tier-name">Team</p>
-        <p class="tier-price">$12 <small>/ seat / mo</small></p>
-        <p class="tier-bill">Billed annually ($144 / seat / year). Monthly $15 / seat. Min 5 seats.</p>
-        <p class="tier-for">Engineering orgs running a real fleet under policy.</p>
+        <p class="tier-name">Fleets</p>
+        <p class="tier-price">Contact sales</p>
+        <p class="tier-bill">Team and Enterprise, quoted</p>
+        <p class="tier-for">Shared dashboards, enforce packs, SSO, air-gap, and an SLA. We write it down first.</p>
         <ul>
           <li>fleet beyond the community cap</li>
           <li>shared findings &amp; team dashboard</li>
-          <li>community + email support</li>
-          <li>free secret enforce rules (Claude Code)</li>
-        </ul>
-        <a class="pill pill-outline tier-cta" href="mailto:sales@getaimonitoring.com?subject=AIM%20Team">Contact Sales</a>
-      </div>
-      <div class="tier">
-        <p class="tier-name">Enterprise</p>
-        <p class="tier-price">From $28 <small>/ seat / mo</small></p>
-        <p class="tier-bill">Annual contract. Volume and air-gap: contact sales.</p>
-        <p class="tier-for">Security-led fleets, on-prem or VPC, compliance and air-gap.</p>
-        <ul>
-          <li>SSO / SCIM / OIDC</li>
-          <li>paid enforce packs &amp; Sentinel</li>
-          <li>compliance evidence packs</li>
+          <li>SSO / SCIM / OIDC and evidence packs</li>
           <li>dedicated support &amp; SLA</li>
         </ul>
-        <a class="pill pill-outline tier-cta" href="mailto:sales@getaimonitoring.com?subject=AIM%20Enterprise">Contact Sales</a>
+        <a class="pill pill-outline tier-cta" href="mailto:sales@getaimonitoring.com">Contact Sales</a>
       </div>
     </div>
   </section>
