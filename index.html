@@ -38,7 +38,7 @@
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
   /* Page uses a custom black-hole cursor; restore a normal pointer on
      clickable controls so CTAs like Get Started feel safe to press.
-     Past half-page scroll, drop the custom cursor entirely (board feedback). */
+     Past half-page scroll, drop the custom cursor entirely. */
   html, body { cursor: none; }
   a, button, input, select, textarea, label, summary, video,
   [role="button"], [role="link"] {
@@ -68,10 +68,8 @@
   :focus-visible { outline: 2px solid #fff; outline-offset: 3px; border-radius: 2px; }
 
   /* Black-hole cursor: real black core (WebGL additive can't paint black).
-     v19: board — v18 size/interaction is fine, but the filled disc looked
-     matte with a dirty gray rim. True-black event horizon, hairline white
-     photon ring (brighter crescent), tight corona. No color, no inset wash,
-     no v15 halo/shock/breathe. */
+     True-black event horizon, hairline white photon ring (brighter crescent),
+     tight corona. No color, no inset wash, no halo or breathe effect. */
   #bh {
     position: fixed;
     left: 0; top: 0;
@@ -165,10 +163,9 @@
   .pill-outline:hover { border-color: rgba(255,255,255,0.6); color: #fff; }
 
   /* ---------- Hero ---------- */
-  /* v10 board trial: hero-only field. Galaxy is painted inside the hero and
-     scrolls away with it (no fixed full-page field). Fixed-viewport v9 is
-     preserved at apps/landing/variants/fixed-viewport.html and git tag
-     landing-fixed-viewport-v9 for instant rollback. */
+  /* Hero-only field: the galaxy is painted inside the hero and scrolls away
+     with it, rather than sitting fixed behind the whole page. A fixed-viewport
+     variant is preserved at apps/landing/variants/fixed-viewport.html. */
   /* Desktop rhythm: a full 100vh hero left ~400px of dead black under the
      CTA before the pillars. Cap the hero band and center the copy inside it
      so the pillar row lands at (or just under) the fold. The <=960px query
@@ -502,61 +499,25 @@
   // (AIM-353 rule). The curve lives in normalized viewport coordinates and is
   // evaluated in the vertex shader, so resize costs nothing.
   //
-  // v5 after board review: system pointer still visible + two white glows
-  // (fixed arc focal + cursor aura) fighting each other. Replace both with a
-  // single black-hole cursor (CSS core, particles feed into it). Hide the OS
-  // cursor. Click enlarges the event horizon; particles swirl in harder.
+  // The field is deliberately almost still: mouse parallax and a slow crawl,
+  // no whole-band rotation. A custom black-hole cursor replaces the OS pointer
+  // over the hero; the normal pointer is restored on links and buttons so CTAs
+  // stay obviously clickable, and past half-page scroll the custom cursor is
+  // dropped entirely. The canvas is absolute inside .hero, so the field scrolls
+  // away with the hero and the cursor maps through getBoundingClientRect.
   //
-  // v6 board polish: restore the normal OS pointer on buttons/links (Get
-  // Started, Contact Sales, etc.) and hide the black hole while hovering them
-  // so CTAs stay obviously clickable.
+  // Two browser constraints the animation loop has to respect:
   //
-  // v7 board polish: field was effectively static without mouse input. Drive
-  // continuous ambient motion (rightward crawl + slow rotation) even when the
-  // pointer is idle, and strip every em dash from page copy.
+  //   * Never feed raw rAF / Date timestamps into the shader. Brave Shields
+  //     farbles performance.now(), and some Mac/WebKit paths hand rAF a huge
+  //     epoch-scale "now". Either makes `uTime = now/1000` explode: fract() on
+  //     the arc becomes noise and the field spins chaotically. Drive it from a
+  //     local sim clock with clamped dt, and keep every ease time-based so
+  //     120 Hz ProMotion does not run 2x faster than 60 Hz.
   //
-  // v8 board polish: "move a little bit more and constant" — raise ambient
-  // speeds, keep whole-field rotation + crawl always on (not mouse-gated).
-  //
-  // v9 board polish: hole drifted / stuck "up" while scrolling. Canvas was
-  // viewport-fixed, cursor→shader mapping used canvas-local coords, and scroll
-  // refreshed hit-testing so the hole stayed under the pointer at any scrollY.
-  //
-  // v10 board trial: hero-only field. Canvas is absolute inside .hero so the
-  // galaxy scrolls away with the hero. Cursor still maps via getBoundingClientRect
-  // (canvas-local), so accretion stays glued while the hero is on-screen and
-  // naturally falls off when the field has scrolled away. Fixed-viewport v9
-  // remains at variants/fixed-viewport.html + tag landing-fixed-viewport-v9.
-  //
-  // v11 board polish: after scrolling past half the page, restore the default
-  // OS cursor and hide the black-hole custom cursor (hero only).
-  //
-  // v12 board fix (Brave + Mac): never feed raw rAF / Date timestamps into
-  // the shader. Brave Shields farble performance.now(); some Mac/WebKit
-  // paths hand rAF a huge epoch-scale "now". Either one makes
-  // `uTime = now/1000` explode — fract() on the arc becomes noise and the
-  // whole-field rotation looks like a permanent chaotic spin. Chrome/Firefox
-  // looked correct because their rAF clock stays small and monotonic.
-  // Drive the field from a local sim clock with clamped dt, and keep every
-  // ease time-based so 120 Hz ProMotion does not run 2× faster than 60 Hz.
-  //
-  // v13 board fix: the live field was still twirling. v7/v8 added a 3.4°/s
-  // whole-band rotation + pivot weave + 8–22s crawl + ambient parallax orbit.
-  // The wanted look is the original comet-tail: slow, almost still, not
-  // rotating. Keep mouse parallax + tiny jitter. Drop rotation/orbit.
-  //
-  // v14 board fix (Chrome/Windows): v13 looked right on Brave/Mac and
-  // other browsers, but Chrome on a 1x PC was completely still. Two
-  // causes: (1) Windows "Animation effects" maps to prefers-reduced-motion
-  // and we zeroed uMotion; (2) ANGLE snaps sub-pixel POINTS, so a
-  // minutes-long crawl + 0.3px jitter never changes a pixel. Keep the
-  // band from rotating. Restore a quiet CSS-px crawl/jitter that stays
-  // visible at 1x and never fully freeze on reduced-motion.
-  //
-  // v15 tried a tiny singularity + bright ring + local swirl. Board:
-  // overdone. v16/v17 quieted the disc (then 2x to 28px). Board: size
-  // is right, but it no longer does anything — restore the original
-  // pull/swirl/click gulp, keep it local (not a page-wide well).
+  //   * ANGLE snaps sub-pixel POINTS on Chrome/Windows, so a minutes-long
+  //     crawl plus 0.3px jitter never changes a pixel and the field looks
+  //     frozen at 1x. Ambient motion has to stay in CSS px to remain visible.
   const canvas = document.getElementById('field');
   const holeEl = document.getElementById('bh');
   const rmQuery = matchMedia('(prefers-reduced-motion: reduce)');
@@ -806,8 +767,8 @@
     const depth = Math.random();
     data[o + 0] = t;
     data[o + 1] = off;
-    // Along-curve speed: almost still (~3–8 min lap). v8's 8–22s lap read as
-    // a streaming/spinning galaxy; the board wants a quiet comet tail.
+    // Along-curve speed: almost still (~3–8 min lap). A faster 8–22s lap reads
+    // as a streaming, spinning galaxy; the intended look is a quiet comet tail.
     data[o + 2] = (0.0022 + 0.0038 * Math.random()) * (0.6 + 0.7 * depth);
     data[o + 3] = depth;
     data[o + 4] = 0.6 + 1.1 * Math.random(); // 0.6-1.7 px at dpr 1
