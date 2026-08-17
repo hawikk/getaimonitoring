@@ -101,6 +101,7 @@
     grid-template-columns: repeat(3, 1fr);
     gap: 88px;
     margin-top: 96px;
+    align-items: stretch;
   }
   .path-name {
     font-family: var(--mono); font-size: 12px; letter-spacing: 0.3em;
@@ -113,9 +114,8 @@
     font-family: var(--mono); font-size: 13px; line-height: 1.75;
     color: var(--dim); margin-top: 16px;
   }
-  .path .pill, .path .link-cta { margin-top: 32px; display: inline-block; }
-  .link-cta { font-size: 14px; color: #aaa; }
-  .link-cta:hover { color: #fff; }
+  .path { display: flex; flex-direction: column; min-height: 100%; }
+  .path .pill { margin-top: auto; padding-top: 32px; align-self: flex-start; }
 
   .note {
     margin-top: 88px;
@@ -203,7 +203,7 @@ cd aim
       <p class="path-name">Enterprise</p>
       <h2>From $28</h2>
       <p>SSO / SCIM, paid enforce packs, evidence, air-gap. Annual contract. Volume priced with sales.</p>
-      <a class="link-cta" href="mailto:sales@getaimonitoring.com?subject=AIM%20Enterprise">Contact Sales →</a>
+      <a class="pill pill-outline" href="mailto:sales@getaimonitoring.com?subject=AIM%20Enterprise">Contact Sales</a>
     </article>
   </div>
 
