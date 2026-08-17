@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Run it locally | AI Monitoring</title>
+<meta name="description" content="There is no hosted dashboard. AI Monitoring runs on your own machine: pipx install aimonitoring-security, then aim personal. No account, no Docker, zero outbound network calls.">
+<link rel="canonical" href="https://getaimonitoring.com/run.html">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://getaimonitoring.com/run.html">
+<meta property="og:title" content="Run it locally | AI Monitoring">
+<meta property="og:description" content="There is no hosted dashboard. See your own AI usage in 60 seconds, entirely on your machine.">
+<meta property="og:image" content="https://getaimonitoring.com/og.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Run it locally | AI Monitoring">
+<meta name="twitter:description" content="There is no hosted dashboard. See your own AI usage in 60 seconds, entirely on your machine.">
+<meta name="twitter:image" content="https://getaimonitoring.com/og.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='5' fill='white'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --sans: "Inter", -apple-system, "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+    --fg: #fff;
+    --dim: #888;
+    --faint: #555;
+    --body: #b9c2be;
+    --accent: #2dd4a8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    background: #000; color: var(--fg); font-family: var(--sans);
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;
+    min-height: 100vh;
+  }
+  a { color: inherit; text-decoration: none; }
+  :focus-visible { outline: 2px solid #fff; outline-offset: 3px; border-radius: 2px; }
+
+  .skip-link {
+    position: absolute; left: -9999px; top: 12px; z-index: 100;
+    background: #fff; color: #000; padding: 8px 16px; border-radius: 999px; font-size: 13px;
+  }
+  .skip-link:focus { left: 12px; }
+
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 26px 44px; }
+  .brand { display: flex; align-items: center; gap: 11px; font-size: 15px; font-weight: 500; letter-spacing: -0.01em; }
+  .brand .dot { width: 11px; height: 11px; border-radius: 50%; background: #fff; box-shadow: 0 0 14px rgba(255,255,255,0.55); }
+  .nav-links { display: flex; gap: 36px; position: absolute; left: 50%; transform: translateX(-50%); }
+  .nav-links a { font-size: 14px; color: #999; transition: color 0.2s; }
+  .nav-links a:hover { color: #fff; }
+  .nav-cta { display: flex; align-items: center; gap: 14px; }
+
+  .pill {
+    display: inline-block; border-radius: 999px; font-size: 14px; font-weight: 500;
+    padding: 9px 22px; line-height: 1.3; white-space: nowrap;
+    transition: box-shadow 0.25s, color 0.2s, border-color 0.2s;
+  }
+  .pill-solid { background: #fff; color: #000; box-shadow: 0 0 30px rgba(255,255,255,0.4); }
+  .pill-solid:hover { box-shadow: 0 0 44px rgba(255,255,255,0.6); }
+  .pill-outline { border: 1px solid rgba(255,255,255,0.28); color: #ddd; }
+  .pill-outline:hover { border-color: rgba(255,255,255,0.6); color: #fff; }
+
+  main { max-width: 1180px; margin: 0 auto; padding: 64px 44px 120px; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.34em;
+    color: var(--dim); text-transform: uppercase; margin-bottom: 28px;
+  }
+  h1 { font-size: clamp(40px, 4.8vw, 60px); font-weight: 200; letter-spacing: -0.02em; line-height: 1.14; max-width: 15em; }
+  .lede { margin-top: 26px; max-width: 40em; font-size: 17px; line-height: 1.65; color: #bbb; }
+  .lede a { color: #fff; border-bottom: 1px solid rgba(255,255,255,0.3); }
+
+  .cmd-block {
+    margin-top: 40px; max-width: 42em;
+    border: 1px solid rgba(255,255,255,0.14); border-radius: 10px;
+    background: rgba(255,255,255,0.025); padding: 22px 24px;
+  }
+  .cmd-block pre {
+    font-family: var(--mono); font-size: 13.5px; line-height: 2; color: #e8e8e8;
+    white-space: pre-wrap; word-break: break-word;
+  }
+  .cmd-block .p { color: var(--accent); user-select: none; }
+  .cmd-block .c { color: var(--faint); }
+  .cmd-cap { margin-top: 16px; font-family: var(--mono); font-size: 12px; line-height: 1.75; color: var(--dim); }
+
+  .grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 64px; margin-top: 96px; }
+  .col h2 { font-size: 15px; font-weight: 500; letter-spacing: 0.01em; margin-bottom: 20px; }
+  .col ul { list-style: none; }
+  .col li {
+    font-family: var(--mono); font-size: 13px; line-height: 1.7;
+    color: var(--body); padding: 9px 0 9px 22px; position: relative;
+    border-top: 1px solid rgba(255,255,255,0.07);
+  }
+  .col li:first-child { border-top: none; }
+  .col li::before {
+    content: ""; position: absolute; left: 0; top: 17px;
+    width: 9px; height: 1px; background: var(--accent);
+  }
+  .col.negative li::before { background: var(--faint); }
+
+  .section { margin-top: 104px; }
+  .section-name {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.3em;
+    text-transform: uppercase; color: var(--dim); margin-bottom: 22px;
+  }
+  .section h2 { font-size: 30px; font-weight: 200; letter-spacing: -0.02em; }
+  .section p { margin-top: 18px; max-width: 40em; font-family: var(--mono); font-size: 13px; line-height: 1.8; color: var(--body); }
+  .section .pill, .section .link-cta { margin-top: 30px; display: inline-block; }
+  .link-cta { font-size: 14px; color: #aaa; }
+  .link-cta:hover { color: #fff; }
+
+  .warn {
+    margin-top: 34px; max-width: 42em; padding: 16px 20px;
+    border-left: 2px solid var(--accent); background: rgba(255,255,255,0.02);
+    font-family: var(--mono); font-size: 12.5px; line-height: 1.8; color: var(--body);
+  }
+  .warn code { color: #fff; }
+
+  footer { display: flex; align-items: center; justify-content: space-between; padding: 44px; flex-wrap: wrap; gap: 20px; }
+  footer .brand { font-size: 14px; color: #ccc; }
+  footer .brand .dot { width: 9px; height: 9px; }
+  footer .fine { font-family: var(--mono); font-size: 12px; color: var(--faint); }
+  footer nav { display: flex; gap: 26px; flex-wrap: wrap; }
+  footer nav a { font-size: 13px; color: #777; }
+  footer nav a:hover { color: #fff; }
+
+  @media (max-width: 960px) {
+    .nav-links { display: none; }
+    .grid { grid-template-columns: 1fr; gap: 48px; }
+  }
+  @media (max-width: 560px) {
+    .nav { padding: 20px 24px; }
+    .nav-cta .pill-outline { display: none; }
+    main, footer { padding-left: 24px; padding-right: 24px; }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="nav">
+  <a class="brand" href="/" aria-label="AI Monitoring home">
+    <span class="dot" aria-hidden="true"></span>
+    <span>AI Monitoring</span>
+  </a>
+  <nav class="nav-links" aria-label="Primary">
+    <a href="/#features">Features</a>
+    <a href="/#video">Video</a>
+    <a href="/#screens">Screens</a>
+    <a href="/#pricing">Pricing</a>
+  </nav>
+  <div class="nav-cta">
+    <a class="pill pill-solid" href="https://github.com/hawikk/aim">GitHub</a>
+    <a class="pill pill-outline" href="mailto:sales@getaimonitoring.com">Contact Sales</a>
+  </div>
+</header>
+
+<main id="main">
+  <p class="eyebrow">run it locally</p>
+  <h1>There is no hosted dashboard. That is the point.</h1>
+  <p class="lede">
+    AI Monitoring is self-hosted. There is no account to create and no server of
+    ours between you and your data, because the entire premise is that your AI
+    usage never leaves infrastructure you control. Personal mode is the fastest
+    way to see that for yourself: one install, one command, your own usage on
+    your own machine.
+  </p>
+
+  <div class="cmd-block">
+    <pre><span class="p">$</span> pipx install aimonitoring-security
+<span class="p">$</span> aim personal
+<span class="c">→ open http://127.0.0.1:8787</span></pre>
+  </div>
+  <p class="cmd-cap">
+    Requires Python 3.11 or newer. Standard library only &mdash; the CLI has no
+    runtime dependencies.
+  </p>
+
+  <div class="warn">
+    Do not run <code>pipx install aim</code>. That name belongs to AimStack's
+    unrelated ML experiment tracker. The distribution here is
+    <code>aimonitoring-security</code>; the command it installs is still
+    <code>aim</code>.
+  </div>
+
+  <div class="grid">
+    <div class="col">
+      <h2>What it reads, locally</h2>
+      <ul>
+        <li>Claude Code session and usage records</li>
+        <li>Cursor local state</li>
+        <li>Kilo Code, Kimi Code, and Grok Build usage</li>
+        <li>Which tools ran, when, how often, and what they cost</li>
+      </ul>
+    </div>
+    <div class="col negative">
+      <h2>What it never does</h2>
+      <ul>
+        <li>Make an outbound network call &mdash; run it with networking off</li>
+        <li>Read or store your prompts</li>
+        <li>Read or store your code or diffs</li>
+        <li>Ask for an account, a key, or an email address</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="section">
+    <p class="section-name">verify it yourself</p>
+    <h2>Do not take the privacy claim on trust.</h2>
+    <p>
+      The canonical event schema rejects prompt text, response bodies, tool-call
+      arguments and plaintext identities, and a guard script proves it in CI.
+      That script has a self-test mode that deliberately removes each control to
+      confirm the check fails when it should &mdash; so the test is itself tested.
+      Both run on every commit, and you can run them without standing up a stack.
+    </p>
+    <a class="pill pill-outline" href="https://github.com/hawikk/aim#trust-and-privacy-principles">Read the guarantees</a>
+  </div>
+
+  <div class="section">
+    <p class="section-name">the full stack</p>
+    <h2>Evaluating it for a team?</h2>
+    <p>
+      Personal mode is a single machine. The full deployment adds the ingest
+      service, Postgres, object storage, the analyst console, shadow-AI
+      discovery and PR security. It runs on a laptop from one script, on
+      loopback, with demo data.
+    </p>
+    <a class="link-cta" href="start.html">See the deployment paths &rarr;</a>
+  </div>
+</main>
+
+<footer>
+  <span class="brand"><span class="dot" aria-hidden="true"></span>AI Monitoring</span>
+  <nav aria-label="Footer">
+    <a href="/#features">Features</a>
+    <a href="/#video">Video</a>
+    <a href="/#pricing">Pricing</a>
+    <a href="https://github.com/hawikk/aim">GitHub</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/.well-known/security.txt">Security</a>
+  </nav>
+  <span class="fine">© 2026 AI Monitoring</span>
+</footer>
+</body>
+</html>

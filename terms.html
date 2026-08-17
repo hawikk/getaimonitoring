@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Terms | AI Monitoring</title>
+<meta name="description" content="Terms for the AI Monitoring website and the Apache-2.0 licensed software. Community is free and self-hosted. Paid tiers are agreed in writing.">
+<link rel="canonical" href="https://getaimonitoring.com/terms.html">
+<meta name="robots" content="index, follow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='5' fill='white'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --sans: "Inter", -apple-system, "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+    --fg: #fff; --dim: #888; --faint: #555; --body: #b9c2be; --accent: #2dd4a8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    background: #000; color: var(--fg); font-family: var(--sans);
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; min-height: 100vh;
+  }
+  a { color: inherit; text-decoration: none; }
+  :focus-visible { outline: 2px solid #fff; outline-offset: 3px; border-radius: 2px; }
+  .skip-link {
+    position: absolute; left: -9999px; top: 12px; z-index: 100;
+    background: #fff; color: #000; padding: 8px 16px; border-radius: 999px; font-size: 13px;
+  }
+  .skip-link:focus { left: 12px; }
+
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 26px 44px; }
+  .brand { display: flex; align-items: center; gap: 11px; font-size: 15px; font-weight: 500; letter-spacing: -0.01em; }
+  .brand .dot { width: 11px; height: 11px; border-radius: 50%; background: #fff; box-shadow: 0 0 14px rgba(255,255,255,0.55); }
+  .nav-cta { display: flex; align-items: center; gap: 14px; }
+  .pill {
+    display: inline-block; border-radius: 999px; font-size: 14px; font-weight: 500;
+    padding: 9px 22px; line-height: 1.3; white-space: nowrap; transition: box-shadow 0.25s, border-color 0.2s, color 0.2s;
+  }
+  .pill-outline { border: 1px solid rgba(255,255,255,0.28); color: #ddd; }
+  .pill-outline:hover { border-color: rgba(255,255,255,0.6); color: #fff; }
+
+  main { max-width: 760px; margin: 0 auto; padding: 56px 44px 120px; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.34em;
+    color: var(--dim); text-transform: uppercase; margin-bottom: 26px;
+  }
+  h1 { font-size: clamp(38px, 4.4vw, 52px); font-weight: 200; letter-spacing: -0.02em; line-height: 1.15; }
+  .updated { margin-top: 20px; font-family: var(--mono); font-size: 12px; color: var(--faint); }
+
+  .summary {
+    margin-top: 40px; padding: 24px 26px;
+    border-left: 2px solid var(--accent); background: rgba(255,255,255,0.025);
+  }
+  .summary p { font-size: 16px; line-height: 1.7; color: #ddd; }
+  .summary p + p { margin-top: 14px; }
+
+  h2 {
+    margin-top: 64px; font-size: 13px; font-weight: 500;
+    font-family: var(--mono); letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim);
+    padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  h2 + p, h2 + ul { margin-top: 22px; }
+  p { font-size: 15.5px; line-height: 1.75; color: var(--body); }
+  p + p { margin-top: 16px; }
+  a.inline { color: #fff; border-bottom: 1px solid rgba(255,255,255,0.3); }
+  a.inline:hover { border-bottom-color: #fff; }
+  ul { list-style: none; margin-top: 18px; }
+  li {
+    font-size: 15px; line-height: 1.7; color: var(--body);
+    padding: 10px 0 10px 24px; position: relative; border-top: 1px solid rgba(255,255,255,0.07);
+  }
+  li:first-child { border-top: none; }
+  li::before { content: ""; position: absolute; left: 0; top: 19px; width: 10px; height: 1px; background: var(--accent); }
+  code { font-family: var(--mono); font-size: 0.92em; color: #fff; }
+  strong { color: #fff; font-weight: 500; }
+
+  footer { display: flex; align-items: center; justify-content: space-between; padding: 44px; flex-wrap: wrap; gap: 20px; }
+  footer .brand { font-size: 14px; color: #ccc; }
+  footer .brand .dot { width: 9px; height: 9px; }
+  footer .fine { font-family: var(--mono); font-size: 12px; color: var(--faint); }
+  footer nav { display: flex; gap: 26px; flex-wrap: wrap; }
+  footer nav a { font-size: 13px; color: #777; }
+  footer nav a:hover { color: #fff; }
+
+  @media (max-width: 560px) {
+    .nav { padding: 20px 24px; }
+    .nav-cta .pill { display: none; }
+    main, footer { padding-left: 24px; padding-right: 24px; }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="nav">
+  <a class="brand" href="/" aria-label="AI Monitoring home">
+    <span class="dot" aria-hidden="true"></span>
+    <span>AI Monitoring</span>
+  </a>
+  <div class="nav-cta">
+    <a class="pill pill-outline" href="/privacy.html">Privacy</a>
+  </div>
+</header>
+
+<main id="main">
+  <p class="eyebrow">terms</p>
+  <h1>Terms of Use</h1>
+  <p class="updated">Last updated 17 August 2026</p>
+
+  <div class="summary">
+    <p><strong>The short version.</strong> The software is free and open source under
+      Apache-2.0, and you self-host it. Nothing on this website is a contract. The
+      prices shown are indicative; a paid tier only exists once both sides have
+      signed something.</p>
+    <p>Because you run it yourself, the software comes with no warranty and we
+      cannot be liable for what it does on your infrastructure.</p>
+  </div>
+
+  <h2>1. The software</h2>
+  <p>
+    AI Monitoring is distributed under the <strong>Apache License 2.0</strong>. Your rights to
+    use, modify and redistribute it come from that licence, and where anything on
+    this page appears to conflict with it, the licence wins. The authoritative text
+    ships in the repository as
+    <a class="inline" href="https://github.com/hawikk/aim/blob/main/LICENSE">LICENSE</a>.
+  </p>
+  <p>
+    The Apache-2.0 disclaimer applies in full: the software is provided
+    <strong>"as is", without warranties or conditions of any kind</strong>, express or implied.
+    You deploy it, you operate it, and you are responsible for what it does in your
+    environment.
+  </p>
+
+  <h2>2. This website</h2>
+  <p>
+    These pages are informational. Descriptions of capability reflect what the
+    software did at the time of writing and may drift ahead of or behind the code;
+    the repository is the source of truth. Nothing here is a warranty,
+    a guarantee of fitness for any particular purpose, or an offer capable of
+    acceptance.
+  </p>
+
+  <h2>3. Pricing and tiers</h2>
+  <ul>
+    <li><strong>Community</strong> is free. Clone it and run it. No account, no card, no
+      email to us required.</li>
+    <li><strong>Team and Enterprise</strong> prices shown on this site are <strong>indicative</strong>. They
+      are a starting point for a conversation, not a published tariff, and they may
+      change without notice.</li>
+    <li>A paid relationship exists only under a <strong>separate written agreement</strong> signed
+      by both parties. That agreement governs support commitments, service levels,
+      data processing, invoicing and termination. Until one exists, no paid
+      obligation binds either side.</li>
+  </ul>
+
+  <h2>4. Acceptable use</h2>
+  <p>
+    AI Monitoring is built to give an organisation visibility into AI tooling on
+    systems it owns or administers. Deploying it to monitor people without the
+    notice and legal basis their jurisdiction requires is your responsibility and
+    may be unlawful. The software ships with pseudonymisation on by default and a
+    consent-notice mechanism, and we would ask you not to defeat either.
+  </p>
+  <p>
+    Do not use the name or branding in a way that suggests we endorse, support, or
+    have audited your deployment.
+  </p>
+
+  <h2>5. Liability</h2>
+  <p>
+    To the fullest extent the law allows, we are not liable for indirect,
+    incidental, special, consequential or exemplary damages, nor for lost profits,
+    lost data, or business interruption, arising from your use of the software or
+    this website. Nothing here limits liability that cannot lawfully be limited,
+    including for death or personal injury caused by negligence, or for fraud.
+  </p>
+
+  <h2 id="security-reports">6. Security reports</h2>
+  <p>
+    We welcome them. Send vulnerability reports to
+    <code>security@getaimonitoring.com</code>, or follow
+    <a class="inline" href="/.well-known/security.txt">security.txt</a>. Please give us a
+    reasonable window to fix an issue before disclosing it publicly. We will not
+    pursue legal action against good-faith research that respects user privacy and
+    avoids service degradation.
+  </p>
+
+  <h2>7. Changes and governing law</h2>
+  <p>
+    These terms may change; the date at the top changes with them, and the history
+    is public in the repository that serves this page. Your continued use after a
+    change means you accept it.
+  </p>
+  <p>
+    These terms are governed by the laws of <strong>{{JURISDICTION}}</strong>, and its courts
+    have jurisdiction over any dispute, without prejudice to any mandatory consumer
+    protections available to you where you live.
+  </p>
+
+  <h2>Contact</h2>
+  <p>
+    General: <code>hello@getaimonitoring.com</code><br>
+    Sales: <code>sales@getaimonitoring.com</code><br>
+    Security: <code>security@getaimonitoring.com</code>
+  </p>
+</main>
+
+<footer>
+  <span class="brand"><span class="dot" aria-hidden="true"></span>AI Monitoring</span>
+  <nav aria-label="Footer">
+    <a href="/">Home</a>
+    <a href="/run.html">Run locally</a>
+    <a href="https://github.com/hawikk/aim">GitHub</a>
+    <a href="/privacy.html">Privacy</a>
+    <a href="/.well-known/security.txt">Security</a>
+  </nav>
+  <span class="fine">© 2026 AI Monitoring</span>
+</footer>
+</body>
+</html>

@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy | AI Monitoring</title>
+<meta name="description" content="This site sets no cookies, runs no analytics, and loads nothing from third parties. AI Monitoring is self-hosted, so your telemetry never reaches us.">
+<link rel="canonical" href="https://getaimonitoring.com/privacy.html">
+<meta name="robots" content="index, follow">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='5' fill='white'/%3E%3C/svg%3E">
+<style>
+  :root {
+    --sans: "Inter", -apple-system, "Segoe UI", "Helvetica Neue", Arial, system-ui, sans-serif;
+    --mono: "JetBrains Mono", ui-monospace, "SF Mono", "Cascadia Code", Menlo, Consolas, monospace;
+    --fg: #fff; --dim: #888; --faint: #555; --body: #b9c2be; --accent: #2dd4a8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body {
+    background: #000; color: var(--fg); font-family: var(--sans);
+    -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; min-height: 100vh;
+  }
+  a { color: inherit; text-decoration: none; }
+  :focus-visible { outline: 2px solid #fff; outline-offset: 3px; border-radius: 2px; }
+  .skip-link {
+    position: absolute; left: -9999px; top: 12px; z-index: 100;
+    background: #fff; color: #000; padding: 8px 16px; border-radius: 999px; font-size: 13px;
+  }
+  .skip-link:focus { left: 12px; }
+
+  .nav { display: flex; align-items: center; justify-content: space-between; padding: 26px 44px; }
+  .brand { display: flex; align-items: center; gap: 11px; font-size: 15px; font-weight: 500; letter-spacing: -0.01em; }
+  .brand .dot { width: 11px; height: 11px; border-radius: 50%; background: #fff; box-shadow: 0 0 14px rgba(255,255,255,0.55); }
+  .nav-cta { display: flex; align-items: center; gap: 14px; }
+  .pill {
+    display: inline-block; border-radius: 999px; font-size: 14px; font-weight: 500;
+    padding: 9px 22px; line-height: 1.3; white-space: nowrap; transition: box-shadow 0.25s, border-color 0.2s, color 0.2s;
+  }
+  .pill-outline { border: 1px solid rgba(255,255,255,0.28); color: #ddd; }
+  .pill-outline:hover { border-color: rgba(255,255,255,0.6); color: #fff; }
+
+  main { max-width: 760px; margin: 0 auto; padding: 56px 44px 120px; }
+  .eyebrow {
+    font-family: var(--mono); font-size: 12px; letter-spacing: 0.34em;
+    color: var(--dim); text-transform: uppercase; margin-bottom: 26px;
+  }
+  h1 { font-size: clamp(38px, 4.4vw, 52px); font-weight: 200; letter-spacing: -0.02em; line-height: 1.15; }
+  .updated { margin-top: 20px; font-family: var(--mono); font-size: 12px; color: var(--faint); }
+
+  .summary {
+    margin-top: 40px; padding: 24px 26px;
+    border-left: 2px solid var(--accent); background: rgba(255,255,255,0.025);
+  }
+  .summary p { font-size: 16px; line-height: 1.7; color: #ddd; }
+  .summary p + p { margin-top: 14px; }
+
+  h2 {
+    margin-top: 64px; font-size: 13px; font-weight: 500;
+    font-family: var(--mono); letter-spacing: 0.22em; text-transform: uppercase; color: var(--dim);
+    padding-bottom: 14px; border-bottom: 1px solid rgba(255,255,255,0.1);
+  }
+  h2 + p, h2 + ul { margin-top: 22px; }
+  p { font-size: 15.5px; line-height: 1.75; color: var(--body); }
+  p + p { margin-top: 16px; }
+  a.inline { color: #fff; border-bottom: 1px solid rgba(255,255,255,0.3); }
+  a.inline:hover { border-bottom-color: #fff; }
+  ul { list-style: none; margin-top: 18px; }
+  li {
+    font-size: 15px; line-height: 1.7; color: var(--body);
+    padding: 10px 0 10px 24px; position: relative; border-top: 1px solid rgba(255,255,255,0.07);
+  }
+  li:first-child { border-top: none; }
+  li::before { content: ""; position: absolute; left: 0; top: 19px; width: 10px; height: 1px; background: var(--accent); }
+  code { font-family: var(--mono); font-size: 0.92em; color: #fff; }
+  strong { color: #fff; font-weight: 500; }
+
+  footer { display: flex; align-items: center; justify-content: space-between; padding: 44px; flex-wrap: wrap; gap: 20px; }
+  footer .brand { font-size: 14px; color: #ccc; }
+  footer .brand .dot { width: 9px; height: 9px; }
+  footer .fine { font-family: var(--mono); font-size: 12px; color: var(--faint); }
+  footer nav { display: flex; gap: 26px; flex-wrap: wrap; }
+  footer nav a { font-size: 13px; color: #777; }
+  footer nav a:hover { color: #fff; }
+
+  @media (max-width: 560px) {
+    .nav { padding: 20px 24px; }
+    .nav-cta .pill { display: none; }
+    main, footer { padding-left: 24px; padding-right: 24px; }
+  }
+</style>
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+
+<header class="nav">
+  <a class="brand" href="/" aria-label="AI Monitoring home">
+    <span class="dot" aria-hidden="true"></span>
+    <span>AI Monitoring</span>
+  </a>
+  <div class="nav-cta">
+    <a class="pill pill-outline" href="/terms.html">Terms</a>
+  </div>
+</header>
+
+<main id="main">
+  <p class="eyebrow">privacy</p>
+  <h1>Privacy Policy</h1>
+  <p class="updated">Last updated 17 August 2026</p>
+
+  <div class="summary">
+    <p><strong>The short version.</strong> This website sets no cookies, runs no
+      analytics, and loads no fonts, scripts or images from anyone else. We do not
+      have a user account system, and there is no form on this site to fill in.</p>
+    <p>The software is self-hosted. When you run AI Monitoring, the telemetry it
+      collects goes to <em>your</em> database on <em>your</em> infrastructure. None
+      of it is transmitted to us, because there is nowhere for it to go.</p>
+  </div>
+
+  <h2>Who this covers</h2>
+  <p>
+    This policy covers the websites at <code>getaimonitoring.com</code>,
+    <code>aimonitoring.app</code> and their subdomains, and any email you send us.
+    It is written for the person operating this project as an independent
+    developer. If we later trade as a registered company, this page will name it.
+  </p>
+
+  <h2>What the website collects</h2>
+  <p>
+    Nothing, directly. There is no analytics tag, no tag manager, no advertising
+    pixel, no cookie banner because there are no cookies, and no third-party
+    request of any kind. You can confirm all of this from your browser's network
+    tab, or by reading the page source, which is a single self-contained file.
+  </p>
+  <p>
+    Two things sit underneath us and keep their own logs, which we do not control
+    and generally do not read:
+  </p>
+  <ul>
+    <li><strong>GitHub Pages</strong> serves these pages, and like any web server it
+      processes request data including your IP address. This is covered by the
+      <a class="inline" href="https://docs.github.com/en/site-policy/privacy-policies/github-general-privacy-statement">GitHub Privacy Statement</a>.</li>
+    <li><strong>Our domain registrar</strong> forwards <code>aimonitoring.app</code> and
+      its subdomains to the main site, and may log those redirects.</li>
+  </ul>
+
+  <h2>What happens when you email us</h2>
+  <p>
+    Writing to <code>sales@</code>, <code>security@</code> or <code>hello@getaimonitoring.com</code>
+    means we receive your address, your message, and whatever you choose to put in
+    it. We use it to answer you and nothing else. You will not be added to a
+    mailing list, and your address will not be sold, rented, or shared with a third
+    party. Threads are kept while the conversation is useful and deleted when it
+    is not.
+  </p>
+  <p>
+    Please do not email us prompts, source code, logs, or customer data. We do not
+    want it, and this policy is much easier to keep if it never arrives.
+  </p>
+
+  <h2>What the software collects, on your own systems</h2>
+  <p>
+    This is not data we process, but it is the question people actually mean, so:
+  </p>
+  <ul>
+    <li>AI Monitoring records <strong>metadata only</strong>. The canonical event schema
+      rejects prompt text, response bodies, tool-call arguments, and plaintext
+      identities, and that rejection is enforced in code and verified in CI.</li>
+    <li>Identities are <strong>pseudonymised at the edge</strong>, before an event leaves the
+      machine that produced it.</li>
+    <li><strong>Personal mode makes zero outbound network calls.</strong> You can verify this
+      by running it with networking disabled.</li>
+    <li>In a self-hosted deployment, you are the data controller. Retention,
+      access, and lawful basis are yours to set, and the documentation covers the
+      knobs.</li>
+  </ul>
+
+  <h2>Your rights</h2>
+  <p>
+    If you are in the UK, EU, or another jurisdiction with equivalent law, you have
+    the right to ask what personal data we hold about you, to have it corrected,
+    and to have it deleted. In practice the only personal data we are ever likely
+    to hold is an email thread you started. Write to
+    <code>hello@getaimonitoring.com</code> and we will confirm or delete it.
+  </p>
+
+  <h2>Changes</h2>
+  <p>
+    If this policy changes, the date at the top changes with it. The page is
+    version-controlled in public, so the full history of what it has ever said is
+    available in the repository that serves it.
+  </p>
+
+  <h2>Contact</h2>
+  <p>
+    Privacy questions: <code>hello@getaimonitoring.com</code>.<br>
+    Security reports: <code>security@getaimonitoring.com</code>, or see
+    <a class="inline" href="/.well-known/security.txt">security.txt</a>.
+  </p>
+</main>
+
+<footer>
+  <span class="brand"><span class="dot" aria-hidden="true"></span>AI Monitoring</span>
+  <nav aria-label="Footer">
+    <a href="/">Home</a>
+    <a href="/run.html">Run locally</a>
+    <a href="https://github.com/hawikk/aim">GitHub</a>
+    <a href="/terms.html">Terms</a>
+    <a href="/.well-known/security.txt">Security</a>
+  </nav>
+  <span class="fine">© 2026 AI Monitoring</span>
+</footer>
+</body>
+</html>
