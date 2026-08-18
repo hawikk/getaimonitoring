@@ -173,7 +173,7 @@
 <span class="c">→ open http://127.0.0.1:8787</span></pre>
   </div>
   <p class="cmd-cap">
-    Requires Python 3.11 or newer. Standard library only &mdash; the CLI has no
+    Requires Python 3.11 or newer. Standard library only. The CLI has no
     runtime dependencies.
   </p>
 
@@ -197,7 +197,7 @@
     <div class="col negative">
       <h2>What it never does</h2>
       <ul>
-        <li>Make an outbound network call &mdash; run it with networking off</li>
+        <li>Make an outbound network call. Run it with networking off</li>
         <li>Read or store your prompts</li>
         <li>Read or store your code or diffs</li>
         <li>Ask for an account, a key, or an email address</li>
@@ -212,7 +212,7 @@
       The canonical event schema rejects prompt text, response bodies, tool-call
       arguments and plaintext identities, and a guard script proves it in CI.
       That script has a self-test mode that deliberately removes each control to
-      confirm the check fails when it should &mdash; so the test is itself tested.
+      confirm the check fails when it should, so the test is itself tested.
       Both run on every commit, and you can run them without standing up a stack.
     </p>
     <a class="pill pill-outline" href="https://github.com/hawikk/aim#trust-and-privacy-principles">Read the guarantees</a>
