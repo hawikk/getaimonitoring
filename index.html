@@ -80,7 +80,7 @@
     border: 0;
     overflow: visible;
     isolation: isolate;
-    /* Tight corona only — the ring itself is ::before so it can be a crescent. */
+    /* Tight corona only: the ring itself is ::before so it can be a crescent. */
     box-shadow:
       0 0 6px 1px rgba(255,255,255,0.38),
       0 0 14px 3px rgba(255,255,255,0.10);
@@ -92,7 +92,7 @@
     transition: opacity 0.18s ease;
   }
   /* Photon ring: razor of light around a void. One side brighter
-     (Doppler beaming), white only — no warm/cool tint. */
+     (Doppler beaming), white only: no warm/cool tint. */
   #bh::before {
     content: "";
     position: absolute;
@@ -731,7 +731,7 @@
   // field as it scrolls (and still works if layout drifts).
   let canvasLeft = 0, canvasTop = 0;
   const HOLE_EASE = 0.22;
-  const POS_EASE = 0.32;      // tight follow — feels like the pointer
+  const POS_EASE = 0.32;      // tight follow: feels like the pointer
   const CLICK_PEAK = 2.25;    // original gulp (~2.8) at the 28px rest size
   const CLICK_PULSE = 1.45;
   const UI_SELECTOR = 'a, button, input, select, textarea, label, summary, video, [role="button"], [role="link"]';
@@ -744,7 +744,7 @@
     holeEl.style.width = (r * 2) + 'px';
     holeEl.style.height = (r * 2) + 'px';
     holeEl.style.transform = 'translate(-50%, -50%)';
-    // #bh is position:fixed — always client/viewport coords, never pageY.
+    // #bh is position:fixed, always client/viewport coords, never pageY.
     holeEl.style.left = hx + 'px';
     holeEl.style.top = hy + 'px';
   }
@@ -791,7 +791,7 @@
   }
 
   // During scroll the pointer stays put (no mousemove) but content slides
-  // under it — re-hit-test so CTAs hide the hole correctly mid-scroll.
+  // under it: re-hit-test so CTAs hide the hole correctly mid-scroll.
   function refreshPointerHit() {
     if (!hasPointer) return;
     let hit = null;
@@ -957,7 +957,7 @@
     const depth = Math.random();
     data[o + 0] = t;
     data[o + 1] = off;
-    // Along-curve speed: almost still (~3–8 min lap). A faster 8–22s lap reads
+    // Along-curve speed: almost still (~3-8 min lap). A faster 8-22s lap reads
     // as a streaming, spinning galaxy; the intended look is a quiet comet tail.
     data[o + 2] = (0.0022 + 0.0038 * Math.random()) * (0.6 + 0.7 * depth);
     data[o + 3] = depth;
@@ -991,7 +991,7 @@
       // Wrap uTime * speed before adding the seed so mediump/highp never
       // lose the fractional lap (the Brave/Mac chaos mode).
       // v14: Chrome/Windows at 1x (and Windows "Animation effects off" →
-      // prefers-reduced-motion) snapped v13's sub-pixel jitter + 3–8 min
+      // prefers-reduced-motion) snapped v13's sub-pixel jitter + 3-8 min
       // crawl to a frozen field. Boost crawl/jitter in CSS px on low-DPR
       // displays. Never multiply motion by zero.
       float dprBoost = (uDpr >= 1.75) ? 1.0 : max(1.0, 3.2 / max(uDpr, 0.75));
@@ -1019,7 +1019,7 @@
       // v18: original accretion (radial pull + tangential swirl + eat),
       // kept local. Idle well is ~14% of viewport height; click grows it
       // toward ~22%. No Keplerian orbit, photon-sphere, or field-wide
-      // ripple — those read as over the screen.
+      // ripple: those read as over the screen.
       vec2 toC = uCursor - pp;
       float d = length(toC);
       float eat = 1.0;
@@ -1144,7 +1144,7 @@
   const PAR_X = 110;
   const PAR_Y = 80;
   // Simulation clock starts at 0 on this page load. Never pass rAF's `now`
-  // (or Date.now) into the shader — see v12 note above.
+  // (or Date.now) into the shader: see v12 note above.
   let simTime = 0;
   let lastFrameNow = null;
   const DT_MIN = 1 / 240;
@@ -1179,7 +1179,7 @@
     // Hole follows the pointer tightly. No spring lag.
     stepHole(dt);
 
-    // Parallax is mouse-only. No ambient orbit — that plus rotation is what
+    // Parallax is mouse-only. No ambient orbit: that plus rotation is what
     // made the live field look like it was tumbling when the pointer sat still.
     const iw = window.innerWidth || 1;
     const ih = window.innerHeight || 1;
